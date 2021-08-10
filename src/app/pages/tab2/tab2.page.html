@@ -1,5 +1,5 @@
 <ion-header no-border>
-  <ion-toolbar>
+  <ion-toolbar color="dark">
     <ion-title> Encabezados </ion-title>
   </ion-toolbar>
 
@@ -14,12 +14,12 @@
       mode="md"
       [value]="categoria"
     >
-      <ion-label text-capitalize> {{ categoria }} </ion-label>
+      <ion-label text-capitalize color="dark"> {{ categoria }} </ion-label>
     </ion-segment-button>
   </ion-segment>
 </ion-header>
 
-<ion-content>
+<ion-content color="dark">
   <app-noticias [noticias]="noticias"></app-noticias>
 
   <ion-infinite-scroll
