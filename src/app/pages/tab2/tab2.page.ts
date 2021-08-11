@@ -12,13 +12,13 @@ export class Tab2Page implements OnInit {
   @ViewChild(IonSegment, { static: true }) segment: IonSegment;
 
   categorias: string[] = [
-    'business',
-    'entertainment',
     'general',
+    'business',
+    'sports',
     'health',
     'sciences',
-    'sports',
     'technology',
+    'entertainment',
   ];
 
   noticias: Article[] = [];

@@ -8,13 +8,15 @@
     mode="md"
     color="primary"
     (ionChange)="cambioCategoria($event)"
+    
   >
     <ion-segment-button
       *ngFor="let categoria of categorias"
       mode="md"
       [value]="categoria"
+      
     >
-      <ion-label text-capitalize color="dark"> {{ categoria }} </ion-label>
+      <ion-label text-capitalize> {{ categoria }} </ion-label>
     </ion-segment-button>
   </ion-segment>
 </ion-header>
