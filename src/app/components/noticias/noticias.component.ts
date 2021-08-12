@@ -10,6 +10,8 @@ export class NoticiasComponent implements OnInit {
 
   @Input() noticias: Article[] = [];
 
+  @Input() enFavoritos = false;
+
   constructor() { }
 
   ngOnInit() {}

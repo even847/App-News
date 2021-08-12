@@ -12,18 +12,21 @@ import { DataLocalService } from 'src/app/services/data-local.service';
   styleUrls: ['./noticia.component.scss'],
 })
 export class NoticiaComponent implements OnInit {
-  @Input() noticia: Article;
 
+  @Input() noticia: Article;
   @Input() indice: number;
+  @Input() enFavoritos;
 
   constructor(
     private iab: InAppBrowser,
     private actionCtrl: ActionSheetController,
     private socialSharing: SocialSharing,
-    private dataLocal: DataLocalService
+    private dataLocal: DataLocalService,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('Favoritos', this.enFavoritos);
+  }
 
   abrirNoticia() {
     // console.log('NOticia', this.noticia.url);
@@ -32,6 +35,31 @@ export class NoticiaComponent implements OnInit {
   }
 
   async lanzarMenu() {
+
+    let guardarBorrarBtn;
+
+    if ( this.enFavoritos ) {
+      guardarBorrarBtn = {
+        text: 'Borrar Favorito',
+        icon: 'trash-outline',
+        cssClass: 'action-dark',
+        handler: () => {
+          console.log('Borrar de Favorito');
+          this.dataLocal.borrarNoticia(this.noticia);
+        },
+      };
+    } else {
+      guardarBorrarBtn = {
+        text: 'Favorito',
+        icon: 'star-outline',
+        cssClass: 'action-dark',
+        handler: () => {
+          console.log('Favorite clicked');
+          this.dataLocal.guardarNoticia(this.noticia);
+        },
+      };
+    }
+
     const actionSheet = await this.actionCtrl.create({
       buttons: [
         {
@@ -48,15 +76,7 @@ export class NoticiaComponent implements OnInit {
             );
           },
         },
-        {
-          text: 'Favorito',
-          icon: 'star-outline',
-          cssClass: 'action-dark',
-          handler: () => {
-            console.log('Favorite clicked');
-            this.dataLocal.guardarNoticia( this.noticia );
-          },
-        },
+        guardarBorrarBtn,
         {
           text: 'Cancel',
           icon: 'close',
@@ -71,4 +91,6 @@ export class NoticiaComponent implements OnInit {
 
     await actionSheet.present();
   }
+
+
 }
